@@ -1,0 +1,48 @@
+/* 회원 정보 수정 폼 스타일 */
+#features {
+	padding-top: 50px;
+}
+
+#features h2 {
+	text-align: center;
+	margin-bottom: 30px;
+}
+
+#editProfileForm {
+	max-width: 600px;
+	margin: auto;
+}
+
+#editProfileForm .form-group {
+	margin-bottom: 20px;
+}
+
+#editProfileForm input[type="text"], #editProfileForm input[type="password"],
+	#editProfileForm input[type="tel"] {
+	width: 100%;
+	padding: 10px;
+	border: 1px solid #ccc;
+	border-radius: 5px;
+	box-sizing: border-box;
+}
+
+#editProfileForm button {
+	width: 100%;
+	padding: 10px;
+	border: none;
+	border-radius: 5px;
+	background-color: #007bff;
+	color: #fff;
+	cursor: pointer;
+	transition: background-color 0.3s ease;
+}
+
+#editProfileForm button:hover {
+	background-color: #0056b3;
+}
+
+.form-control {
+	width: 100%;
+	max-width: 100%;
+	margin-bottom: 10px;
+}

@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.doongdoong.web.mybatis.cart.CartMapper">
+
+<!-- 카트 추가 -->
+<insert id="addCart">
+
+   <selectKey resultType="int" keyProperty="cart_id" order="BEFORE">
+      select seq_cart.nextval FROM dual
+   </selectKey>
+   
+   insert into tbl_cart(cart_id, userid, product_id, amount, cateCode) 
+   values(#{cart_id}, #{userid}, #{product_id}, #{amount}, #{cateCode})
+
+</insert>
+
+<!-- 카트 삭제 -->
+<delete id="deleteCart">
+
+   delete from tbl_cart where cart_id = #{cart_id}
+
+</delete>
+
+<!-- 카트 수량 수정 -->
+<update id="modifyCount">
+
+   update tbl_cart set amount=#{amount} where cart_id = #{cart_id}
+
+</update>
+
+<!-- 카트 목록 -->
+<select id="getCart" resultType = "com.doongdoong.web.cart.CartVO"> 
+   
+   select a.cart_id, a.userid, a.product_id, a.amount, b.productPrice, b.cateCode, b.cateName
+   from tbl_cart a left outer join tbl_pcate b on a.cateCode = b.cateCode
+   left outer join tbl_product c on b.cateCode = c.cateCode
+   where a.userid = #{userid}
+
+</select>
+
+<!-- 카트 확인 -->
+<select id="checkCart" resultType="com.doongdoong.web.cart.CartVO">
+
+   select * from tbl_cart
+   where userid = #{userid} and product_id = #{product_id}
+
+</select>
+
+<!-- 주문 시 카트 제거 -->
+
+<delete id="deleteOrderCart">
+
+	delete from tbl_cart where userid = #{userid} and product_id = #{product_id}
+
+</delete>
+
+</mapper>

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans:beans xmlns="http://www.springframework.org/schema/mvc"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:beans="http://www.springframework.org/schema/beans"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:security="http://www.springframework.org/schema/security"
+	xsi:schemaLocation="http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-5.2.xsd
+		http://www.springframework.org/schema/mvc https://www.springframework.org/schema/mvc/spring-mvc.xsd
+		http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd">
+
+	<!-- DispatcherServlet Context: defines this servlet's request-processing infrastructure -->
+	
+	<!-- Spring MVC @Controller 프로그래밍 모델을 활성화 함 -->
+	<!-- 어노테이션을 사용가능하도록 설정 -->
+	<annotation-driven />
+
+	<!--/resources/** 경로의 HTTP GET 요청을 처리하여 ${webappRoot}/resources 디텍터리에 있는 정적 리소스를 효율적으로 제공함 -->
+	<resources mapping="/resources/**" location="/resources/" />
+
+	<!--@Controller에서 선택한 뷰를 /WEB-INF/views 디렉터리의 .jsp 리소스로 해석함 -->
+	<beans:bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<!-- 뷰(jsp)의 접두오, 접미어 설정 : 파일명만 작성할 수 있게 세팅 -->
+		<!-- 접두어(디렉토리) -->
+		<beans:property name="prefix" value="/WEB-INF/views/" />
+		<!-- 접미어(확장자) -->
+		<beans:property name="suffix" value=".jsp" />
+	</beans:bean>
+	
+	<!-- 업로드 관련 빈 -->
+	<beans:bean id="multipartResolver" class="org.springframework.web.multipart.support.StandardServletMultipartResolver"></beans:bean>	
+	
+	<context:component-scan base-package="com.doongdoong.web" />
+	
+	<security:global-method-security pre-post-annotations="enabled" secured-annotations="enabled">
+	</security:global-method-security>
+	
+	
+	
+</beans:beans>

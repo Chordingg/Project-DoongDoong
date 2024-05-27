@@ -1,0 +1,140 @@
+body {
+	font-family: Arial, sans-serif;
+	text-align: center;
+}
+
+.image_wrap img {
+	width: 200px; /* 이미지의 너비를 100픽셀로 고정 */
+	height: auto; /* 이미지의 높이를 100픽셀로 고정 */
+	text-align: center;
+}
+
+.content_area {
+	width: 80%;
+	margin: 0 auto;
+}
+
+.content_subject span {
+	font-size: 24px;
+	font-weight: bold;
+}
+
+.subject_table, .cart_table {
+	width: 100%;
+	border-collapse: collapse;
+}
+
+.subject_table th, .cart_table td {
+	border: 1px solid #ddd;
+	padding: 8px;
+	text-align: center;
+}
+
+.subject_table th {
+	background-color: #f2f2f2;
+	font-weight: bold;
+}
+
+.td_width_1 {
+	width: 5%;
+}
+
+.td_width_2 {
+	width: 30%;
+}
+
+.td_width_3 {
+	width: 15%;
+}
+
+
+
+.input_size_20 {
+	width: 20px;
+	height: 20px;
+}
+
+.cart_info_td {
+	padding: 10px;
+}
+
+.price_td, .table_text_align_center {
+	text-align: center;
+}
+
+.quantity_div {
+	align-items: center;
+}
+
+.quantity_input {
+	width: 50px;
+	text-align: center;
+}
+
+.quantity_btn {
+	padding: 8px 15px; /* 위아래 패딩은 5픽셀, 좌우 패딩은 10픽셀로 설정합니다 */
+	margin-left: 5px;
+	margin-right: 5px;
+	margin: 0 3px;
+}
+
+.quantity_modify_btn {
+	margin-top: 5px;
+	display: inline-block;
+}
+
+.delete_btn button {
+	background-color: #f44336;
+	color: white;
+	border: none;
+	padding: 5px 10px;
+	cursor: pointer;
+}
+
+.delete_btn button:hover {
+	background-color: #d32f2f;
+}
+
+.total_wrap {
+	margin-top: 20px;
+}
+
+.total_wrap table {
+	width: 100%;
+	border-collapse: collapse;
+}
+
+.total_wrap td {
+	padding: 8px;
+	border: 1px solid #ddd;
+}
+
+.boundary_div {
+	margin: 20px 0;
+	border-top: 1px solid #ddd;
+	text-align: center;
+}
+
+.content_btn_section a {
+	display: inline-block;
+	padding: 10px 20px;
+	background-color: #4CAF50;
+	color: white;
+	text-decoration: none;
+	font-weight: bold;
+	border-radius: 5px;
+	margin: 20px 0;
+	text-align: center;
+}
+
+.content_btn_section a:hover {
+	background-color: #45a049;
+}
+
+.individual_cart_checkbox {
+	width: 20px !important;
+	height: 20px !important;
+	display: inline-block;
+	background-color: #fff; /* 배경색을 흰색으로 설정 */
+	border: 1px solid #000; /* 검은색 테두리 추가 */
+}

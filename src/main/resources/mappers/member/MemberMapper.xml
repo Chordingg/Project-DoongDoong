@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.doongdoong.web.mybatis.member.MemberMapper">
+
+   <insert id="insert">
+      insert into tbl_member(userid, userpw, userName, phone, memberAddr1, memberAddr2, memberAddr3) 
+      values(#{userid}, #{userpw}, #{userName}, #{phone}, #{memberAddr1}, #{memberAddr2}, #{memberAddr3})
+   </insert>
+
+   <insert id="insertAuth">
+      insert into tbl_member_auth(userid) 
+      values(#{userid})
+   </insert>
+   
+   <insert id="insertKakao">
+      insert into tbl_member(userid, userName, phone, memberAddr1, memberAddr2, memberAddr3) 
+      values(#{userid}, #{userName}, #{phone}, #{memberAddr1}, #{memberAddr2}, #{memberAddr3})
+   </insert>
+
+   <resultMap type="com.doongdoong.web.member.MemberVO" id="memberMap">
+
+      <id property="userid" column="userid" />
+
+      <result property="userid" column="userid" />
+      <result property="userpw" column="userpw" />
+      <result property="userName" column="username" />
+      <result property="phone" column="phone" />
+      <result property="money" column="money" />
+      <result property="memberAddr1" column="memberAddr1" />
+      <result property="memberAddr2" column="memberAddr2" />
+      <result property="memberAddr3" column="memberAddr3" />
+      <result property="regDate" column="regdate" />
+      <result property="updateDate" column="updatedate" />
+      <result property="enabled" column="enabled" />
+
+      <collection property="authList" resultMap="authMap"></collection>
+   </resultMap>
+
+   <resultMap type="com.doongdoong.web.member.AuthVO" id="authMap">
+      <result property="userid" column="userid" />
+      <result property="auth" column="auth" />
+   </resultMap>
+
+   <select id="read" resultMap="memberMap">
+      select
+      m.userid, userpw, username, phone, money, enabled, regdate, 
+      updatedate, memberAddr1, memberAddr2, memberAddr3, auth
+      from
+      tbl_member m left join tbl_member_auth a
+      on m.userid = a.userid
+      where m.userid = #{userid}
+   </select>
+
+	<!-- 아이디 중복 확인 -->
+   <select id="idCheck" resultType="int">
+      select count(*) from tbl_member where userid = #{userid}
+   </select>
+   
+   <!-- 회원정보 수정-->
+	<update id="updateMember" >
+		update tbl_member set 
+		userpw=#{userpw}, userName=#{userName}, 
+		phone=#{phone}, memberAddr1=#{memberAddr1}, memberAddr2=#{memberAddr2}, memberAddr3=#{memberAddr3}
+		where userid=#{userid}
+	</update>
+	
+	
+	<!-- 회원 탈퇴 -->
+	<delete id="deleteMember">
+		delete from tbl_member where userid = #{userId}
+	</delete>
+	<!-- 회원 탈퇴 -->
+	<delete id="deleteAuthMember">
+		delete from tbl_member_auth where userid = #{userId}
+	</delete> 
+	<!-- 회원 탈퇴 -->
+	<delete id="deleteCartMember">
+		delete from tbl_cart where userid = #{userId}
+	</delete> 
+	
+	<!-- 회원 탈퇴 
+	<delete id="deleteReviewMember">
+		delete from tbl_member where userid = #{userId}
+	</delete>  -->
+	 
+	
+	<select id="emailCheck" resultType="string">
+      select userid from tbl_member
+      where userid = #{userid}
+   </select>
+   
+    <!-- 아이디 찾기 -->
+	<select id="findUser" resultType="String">
+		
+		select userid from tbl_member
+		where phone=#{phone}
+		
+	</select>
+	
+	<update id="updatePwd">
+		update tbl_member set userpw = #{userpw} where userid = #{userid}
+	</update>
+   
+   
+   	<!-- 주문자 정보 -->
+   	<select id="getMemberInfo" resultMap="memberMap">
+   	
+   	    select
+      m.userid, username, phone, money, enabled, regdate, 
+      updatedate, memberAddr1, memberAddr2, memberAddr3, auth
+      from
+      tbl_member m left join tbl_member_auth a
+      on m.userid = a.userid
+      where m.userid = #{userid}
+   	
+   	</select>
+   	
+   	<!-- 로그인 -->
+   	<select id="memberLogin" resultType="com.doongdoong.web.member.MemberVO">
+   	
+   		select userid, userName, money from tbl_member where userid = ${userid} and userpw = #{userpw}
+   	
+   	</select>
+</mapper>
